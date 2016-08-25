@@ -202,7 +202,7 @@ def main():
     module = AnsibleModule(
         argument_spec=dict(
             group=dict(required=True, type='str'),
-            members=dict(required=False),
+            members=dict(required=False, type='list'),
             mode=dict(required=False, choices=['static', 'dynamic']),
             type=dict(required=False, choices=['bridged', 'routed']),
             lacp_mode=dict(required=False, choices=['active', 'passive']),
