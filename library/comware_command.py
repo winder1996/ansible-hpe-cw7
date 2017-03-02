@@ -115,7 +115,7 @@ def main():
     module = AnsibleModule(
         argument_spec=dict(
             type=dict(required=True, choices=['display', 'show', 'config']),
-            command=dict(required=True),
+            command=dict(required=True, type='list'),
             port=dict(default=830, type='int'),
             hostname=dict(required=True),
             username=dict(required=True),
