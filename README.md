@@ -143,7 +143,7 @@ While in a terminal session on your Linux machine, execute one of the following 
 **Latest From Source**
 
 ```
-$ git clone https://github.com/networktocode/pyhpecw7
+$ git clone https://github.com/HPENetworking/pyhpecw7.git
 $ cd pyhpecw7
 $ sudo python setup.py install
 ```
