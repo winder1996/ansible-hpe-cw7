@@ -204,7 +204,7 @@ def main():
             group=dict(required=True, type='str'),
             members=dict(required=False, type='list'),
             mode=dict(required=False, choices=['static', 'dynamic']),
-            type=dict(required=False, choices=['bridged', 'routed']),
+            type=dict(required=True, choices=['bridged', 'routed']),
             lacp_mode=dict(required=False, choices=['active', 'passive']),
             lacp_edge=dict(required=False, choices=['enabled', 'disabled']),
             min_ports=dict(required=False, type='str'),
