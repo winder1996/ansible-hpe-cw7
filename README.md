@@ -233,7 +233,7 @@ $ cd
 Perform a clone of this project.
 
 ```
-$ git clone https://github.com/networktocode/hp-ansible
+$ git clone https://github.com/HPENetworking/ansible-hpe-cw7
 ```
 
 Navigate to the new `hp-ansible` directory.
