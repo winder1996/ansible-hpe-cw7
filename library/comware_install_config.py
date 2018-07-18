@@ -98,6 +98,7 @@ try:
     from pyhpecw7.comware import HPCOM7
     from pyhpecw7.features.errors import *
     from pyhpecw7.errors import *
+    from ansible.module_utils.parsing.convert_bool import BOOLEANS, BOOLEANS_TRUE, BOOLEANS_FALSE
 except ImportError as ie:
     HAS_PYHP = False
 

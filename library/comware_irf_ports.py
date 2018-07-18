@@ -127,6 +127,7 @@ try:
     from pyhpecw7.features.irf import *
     from pyhpecw7.features.interface import Interface
     from pyhpecw7.errors import *
+    from ansible.module_utils.parsing.convert_bool import BOOLEANS, BOOLEANS_TRUE, BOOLEANS_FALSE
 except ImportError as ie:
     HAS_PYHP = False
 
