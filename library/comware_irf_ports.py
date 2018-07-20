@@ -297,7 +297,7 @@ def main():
                       commands=commands)
         else:
             try:
-                device.execute()
+                device.execute_staged()
                 end_state = irf_ports.get_config()
                 changed = True
                 results['changed'] = changed

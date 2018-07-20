@@ -293,7 +293,7 @@ def main():
                       commands=commands)
         else:
             try:
-                device.execute()
+                device.execute_staged()
                 end_state = irfm.get_config(member_id)
             except PYHPError as e:
                 safe_fail(module, device, msg=str(e))
@@ -317,7 +317,7 @@ def main():
             my_reboot = Reboot(device)
             my_reboot.build(reboot=True)
             changed = True
-            device.execute()
+            device.execute_staged()
         except PYHPError as e:
             if isinstance(e, NCTimeoutError)\
                     or isinstance(e, ConnectionClosedError):
