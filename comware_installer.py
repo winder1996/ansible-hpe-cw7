@@ -53,7 +53,7 @@ def define_arguments():
     group = parser.add_mutually_exclusive_group(required=False)
     group.add_argument('--switch', required=False,
                        help=('only install files/directories required for '
-                             'AOS-Switch.'
+                             'Comware.'
                              ),
                        action='store_true')
     return parser.parse_args()
