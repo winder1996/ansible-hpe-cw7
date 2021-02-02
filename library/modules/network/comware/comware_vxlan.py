@@ -127,7 +127,7 @@ def safe_exit(module, device=None, **kwargs):
 
 
 def normalize_to_list(data):
-    if isinstance(data, str) or isinstance(data, unicode):
+    if isinstance(data, str):
         return [data]
     elif isinstance(data, list):
         return data
@@ -181,7 +181,7 @@ def main():
     changed = False
 
     args = dict(vxlan=vxlan, vsi=vsi, descr=descr)
-    proposed = dict((k, v) for k, v in args.iteritems() if v is not None)
+    proposed = dict((k, v) for k, v in args.items() if v is not None)
 
     try:
         device.open()
@@ -206,13 +206,12 @@ def main():
     if state == 'present':
         checks(existing, proposed, module)
 
-    if 'tunnels' in existing.keys():
+    if 'tunnels' in existing:
         existing_tunnels = existing.pop('tunnels')
     else:
         existing_tunnels = []
 
-    delta = dict(set(proposed.iteritems()).difference(
-        existing.iteritems()))
+    delta = dict(set(proposed.items()) - set(existing.items()))
 
     tunnels_to_add = list(set(tunnels).difference(existing_tunnels))
     tunnels_to_remove = list(set(existing_tunnels).difference(tunnels))

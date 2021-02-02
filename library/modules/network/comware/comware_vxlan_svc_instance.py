@@ -202,7 +202,7 @@ def main():
     changed = False
 
     args = dict(encap=encap, vlanid=vlanid, access_mode=access_mode)
-    proposed = dict((k, v) for k, v in args.iteritems() if v is not None)
+    proposed = dict((k, v) for k, v in args.items() if v is not None)
 
     try:
         device.open()
@@ -253,8 +253,7 @@ def main():
     # keys: vsi added when xconnect command exists on interface for
     # this instance
 
-    delta = dict(set(proposed.iteritems()).difference(
-        existing.iteritems()))
+    delta = dict(set(proposed.items()) - set(existing.items()))
 
     if state == 'present':
         if existing:

@@ -173,11 +173,10 @@ def get_delta(existing, proposed, existing_members, proposed_members,
                               existing_members))
 
     lacp_modes_by_interface = []
-    if 'lacp_modes_by_interface' in existing.keys():
+    if 'lacp_modes_by_interface' in existing:
         lacp_modes_by_interface = existing.pop('lacp_modes_by_interface')
 
-    attr_delta = dict(set(proposed.iteritems()).difference(
-                      existing.iteritems()))
+    attr_delta = dict(set(proposed.items()) - set(existing.items()))
 
     if members_to_add:
         attr_delta['members'] = members_to_add
@@ -192,7 +191,7 @@ def get_delta(existing, proposed, existing_members, proposed_members,
     if lacp_to_change:
         attr_delta['lacp_to_change'] = lacp_to_change
         portchannel.desired_lacp_mode = attr_delta.pop('lacp_mode')
-    if 'lacp_mode' in attr_delta.keys():
+    if 'lacp_mode' in attr_delta:
         attr_delta.pop('lacp_mode')
 
     return attr_delta
@@ -259,7 +258,7 @@ def main():
     args = dict(groupid=groupid, lacp_edge=lacp_edge, mode=mode,
                 min_ports=min_ports, max_ports=max_ports, lacp_mode=lacp_mode)
 
-    proposed = dict((k, v) for k, v in args.iteritems() if v is not None)
+    proposed = dict((k, v) for k, v in args.items() if v is not None)
 
     try:
         device.open()
@@ -278,7 +277,7 @@ def main():
     except PYHPError as e:
         safe_fail(module, device, msg=str(e))
 
-    if 'members' in existing.keys():
+    if 'members' in existing:
         existing_members = existing.pop('members')
     else:
         existing_members = []

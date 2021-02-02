@@ -217,7 +217,7 @@ def main():
                   descr='Error getting the existing configuration.',
                   msg=str(e))
 
-    proposed = dict((k, v) for k, v in module.params.iteritems()
+    proposed = dict((k, v) for k, v in module.params.items()
                     if v is not None and k not in filtered_keys)
 
     if existing:

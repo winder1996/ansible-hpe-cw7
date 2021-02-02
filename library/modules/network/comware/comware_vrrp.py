@@ -215,7 +215,7 @@ def main():
                 vip=vip, interface=interface, auth_mode=auth_mode,
                 key_type=key_type, key=key)
 
-    proposed = dict((k, v) for k, v in args.iteritems() if v is not None)
+    proposed = dict((k, v) for k, v in args.items() if v is not None)
 
     try:
         device.open()
@@ -243,8 +243,7 @@ def main():
                   descr='could not get existing config')
 
     if state == 'present':
-        delta = dict(set(proposed.iteritems()).difference(
-            existing.iteritems()))
+        delta = dict(set(proposed.items()) - set(existing.items()))
         if delta or auth_mode or \
                 existing.get('admin') == 'down':
             delta['vrid'] = vrid

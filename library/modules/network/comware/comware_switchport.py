@@ -231,12 +231,11 @@ def main():
         safe_fail(module, device, msg=str(e),
                   descr='Error getting switchpot config.')
 
-    proposed = dict((k, v) for k, v in module.params.iteritems()
+    proposed = dict((k, v) for k, v in module.params.items()
                     if v is not None and k not in filtered_keys)
 
     if state == 'present':
-        delta = dict(set(proposed.iteritems()).difference(
-            existing.iteritems()))
+        delta = dict(set(proposed.items()) - set(existing.items()))
         if delta:
             delta['link_type'] = proposed.get('link_type')
             pvid = proposed.get('pvid')
@@ -246,8 +245,7 @@ def main():
             switchport.build(stage=True, **delta)
     elif state == 'default':
         defaults = switchport.get_default()
-        delta = dict(set(existing.iteritems()).difference(
-            defaults.iteritems()))
+        delta = dict(set(existing.items()) - set(defaults.items()))
         if delta:
             switchport.default(stage=True)
 
