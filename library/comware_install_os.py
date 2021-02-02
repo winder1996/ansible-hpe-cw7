@@ -209,6 +209,8 @@ def main():
     existing_boot = existing['startup-primary']['boot']
     existing_system = existing['startup-primary']['system']
     remote_dir = module.params['remote_dir']
+    current_boot_file = remote_dir + existing_boot
+    current_sys_file = remote_dir + existing_system
 
     if ipe_package:
         ipe_basename = os.path.basename(ipe_package)
@@ -240,6 +242,10 @@ def main():
             delete_ipe = module.params.get('delete_ipe')
             ios.build(
                 'ipe', ipe=ipe_file_copy.dst, delete_ipe=delete_ipe, stage=True)
+            # set current boot/sys files as backup startup images
+            ios.build(
+                'bootsys', boot=current_boot_file,
+                system=current_sys_file, startup_type='2', stage=True)
     elif boot:
         boot_basename = os.path.basename(boot)
         system_basename = os.path.basename(system)
@@ -283,6 +289,10 @@ def main():
             ios.build(
                 'bootsys', boot=boot_file_copy.dst,
                 system=system_file_copy.dst, stage=True)
+            # set current boot/sys files as backup startup images
+            ios.build(
+                'bootsys', boot=current_boot_file,
+                system=current_sys_file, startup_type='2', stage=True)
 
     commands = None
     end_state = existing
