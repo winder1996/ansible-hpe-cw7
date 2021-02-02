@@ -102,6 +102,7 @@ try:
     from pyhpecw7.comware import HPCOM7
     from pyhpecw7.features.errors import *
     from pyhpecw7.errors import *
+    from ansible.module_utils.parsing.convert_bool import BOOLEANS, BOOLEANS_TRUE, BOOLEANS_FALSE
 except ImportError as ie:
     HAS_PYHP = False
 
@@ -195,6 +196,7 @@ def main():
             try:
                 response = device.execute_staged()
                 changed = True
+
             except PYHPError as e:
                 if isinstance(e, NCTimeoutError):
                     results['changed'] = True
@@ -203,7 +205,7 @@ def main():
                     module.exit_json(**results)
                 else:
                     safe_fail(module, device, msg=str(e),
-                              descr='error during execution')
+                              descr='error during execution of REBOOT')
 
     results['proposed'] = proposed
     results['commands'] = commands

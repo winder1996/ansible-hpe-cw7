@@ -152,6 +152,7 @@ try:
     from pyhpecw7.features.reboot import Reboot
     from pyhpecw7.features.errors import *
     from pyhpecw7.errors import *
+    from ansible.module_utils.parsing.convert_bool import BOOLEANS, BOOLEANS_TRUE, BOOLEANS_FALSE
 except ImportError as ie:
     HAS_PYHP = False
 
@@ -292,7 +293,7 @@ def main():
                       commands=commands)
         else:
             try:
-                device.execute()
+                device.execute_staged()
                 end_state = irfm.get_config(member_id)
             except PYHPError as e:
                 safe_fail(module, device, msg=str(e))
@@ -316,7 +317,7 @@ def main():
             my_reboot = Reboot(device)
             my_reboot.build(reboot=True)
             changed = True
-            device.execute()
+            device.execute_staged()
         except PYHPError as e:
             if isinstance(e, NCTimeoutError)\
                     or isinstance(e, ConnectionClosedError):
