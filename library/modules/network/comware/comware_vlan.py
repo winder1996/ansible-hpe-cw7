@@ -143,7 +143,7 @@ def main():
     changed = False
 
     args = dict(vlanid=vlanid, name=name, descr=descr)
-    proposed = dict((k, v) for k, v in args.iteritems() if v is not None)
+    proposed = dict((k, v) for k, v in args.items() if v is not None)
 
     try:
         device.open()
@@ -167,8 +167,7 @@ def main():
                   descr='error getting vlan config')
 
     if state == 'present':
-        delta = dict(set(proposed.iteritems()).difference(
-            existing.iteritems()))
+        delta = dict(set(proposed.items()) - set(existing.items()))
         if delta:
             vlan.build(stage=True, **delta)
     elif state == 'absent':

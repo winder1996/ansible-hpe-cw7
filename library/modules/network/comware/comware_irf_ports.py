@@ -214,7 +214,7 @@ def main():
 
     existing = existing_full.get(member_id, {})
 
-    proposed = dict((k, v) for k, v in module.params.iteritems()
+    proposed = dict((k, v) for k, v in module.params.items()
                     if v is not None and k not in filtered_keys)
 
     irf_p1 = proposed.get('irf_p1')

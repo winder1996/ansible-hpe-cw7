@@ -155,7 +155,7 @@ def main():
     changed = False
 
     args = dict(src=src, dest=dest)
-    proposed = dict((k, v) for k, v in args.iteritems() if v is not None)
+    proposed = dict((k, v) for k, v in args.items() if v is not None)
 
     try:
         device.open()
@@ -182,8 +182,7 @@ def main():
             safe_fail(module, device, msg='tunnel interface exists but is not a '
                       + 'vxlan \ntunnel interface. remove and re-add.')
 
-    delta = dict(set(proposed.iteritems()).difference(
-        existing.iteritems()))
+    delta = dict(set(proposed.items()) - set(existing.items()))
 
     try:
         existing_gsrc = tun.get_global_source()

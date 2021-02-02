@@ -180,7 +180,7 @@ def main():
                                      '\nPlease configure type first by itself,'
                                      '\nthen run again.')
 
-    proposed = dict((k, v) for k, v in module.params.iteritems()
+    proposed = dict((k, v) for k, v in module.params.items()
                     if v is not None and k not in filtered_keys)
 
     try:
@@ -212,8 +212,7 @@ def main():
                   descr='Error getting existing config.')
 
     if state == 'present':
-        delta = dict(set(proposed.iteritems()).difference(
-            existing.iteritems()))
+        delta = dict(set(proposed.items()) - set(existing.items()))
         if delta or not existing:
             original = existing
             if not interface.iface_exists:
@@ -228,23 +227,20 @@ def main():
                         msg='Exception message ' + str(e),
                         descr='There was a problem creating'
                         + ' the logical interface.')
-                delta = dict(set(proposed.iteritems()).difference(
-                    existing.iteritems()))
+                delta = dict(set(proposed.items()) - set(existing.items()))
 
             if delta:
                 interface.build(stage=True, **delta)
     elif state == 'default':
         defaults = interface.get_default_config()
-        delta = dict(set(existing.iteritems()).difference(
-            defaults.iteritems()))
+        delta = dict(set(existing.items()) - set(defaults.items()))
         if delta:
             interface.default(stage=True)
     elif state == 'absent':
         if interface.iface_exists:
             if interface.is_ethernet:
                 defaults = interface.get_default_config()
-                delta = dict(set(existing.iteritems()).difference(
-                    defaults.iteritems()))
+                delta = dict(set(existing.items()) - set(defaults.items()))
                 if delta:
                     try:
                         interface.default(stage=True)

@@ -246,7 +246,7 @@ def main():
         else:
             safe_fail(module, device, msg=str(e))
 
-    proposed = dict((k, v) for k, v in module.params.iteritems()
+    proposed = dict((k, v) for k, v in module.params.items()
                     if v is not None and k not in filtered_keys)
 
     mad_exclude = proposed.pop('mad_exclude', [])
@@ -263,8 +263,7 @@ def main():
     mad_delta = list(set(mad_exclude).difference(
         existing_mad_exclude))
 
-    delta = dict(set(proposed.iteritems()).difference(
-        existing.iteritems()))
+    delta =  dict(set(proposed.items()) - set(existing.items()))
 
     proposed['mad_exclude'] = mad_exclude
     existing['mad_exclude'] = existing_mad_exclude
